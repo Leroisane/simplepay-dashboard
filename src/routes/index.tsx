@@ -7,6 +7,7 @@ import { Header } from "@/components/simplepay/Header";
 import { Dashboard } from "@/components/simplepay/Dashboard";
 import { Transfer } from "@/components/simplepay/Transfer";
 import { HistoryView } from "@/components/simplepay/HistoryView";
+import { Scheduled } from "@/components/simplepay/Scheduled";
 import type { Profile, Schedule, Transaction } from "@/components/simplepay/types";
 
 export const Route = createFileRoute("/")({
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/")({
 const titles: Record<View, string> = {
   dashboard: "Dashboard",
   transfer: "Transfer",
+  scheduled: "Scheduled",
   history: "History",
 };
 
@@ -66,6 +68,9 @@ function Index() {
           )}
           {view === "transfer" && (
             <Transfer profile={profile} onSuccess={loadAll} />
+          )}
+          {view === "scheduled" && (
+            <Scheduled schedules={schedules} onSuccess={loadAll} />
           )}
           {view === "history" && <HistoryView transactions={transactions} />}
         </main>
