@@ -1,11 +1,12 @@
-import { LayoutDashboard, Send, History, Wallet } from "lucide-react";
+import { LayoutDashboard, Send, History, Wallet, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export type View = "dashboard" | "transfer" | "history";
+export type View = "dashboard" | "transfer" | "scheduled" | "history";
 
 const items: { id: View; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "transfer", label: "Transfer", icon: Send },
+  { id: "scheduled", label: "Scheduled", icon: Calendar },
   { id: "history", label: "History", icon: History },
 ];
 
