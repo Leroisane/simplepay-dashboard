@@ -42,12 +42,8 @@ export function Dashboard({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight">
-          Halo, {profile?.name ?? "—"}
-        </h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Selamat datang kembali di SimplePay.
-        </p>
+        <h2 className="text-2xl font-semibold tracking-tight">Halo, {profile?.name ?? "—"}</h2>
+        <p className="text-sm text-muted-foreground mt-1">Selamat datang kembali di SimplePay.</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -61,9 +57,7 @@ export function Dashboard({
                     <p className="text-xs uppercase tracking-wide text-muted-foreground">
                       {c.label}
                     </p>
-                    <p className="mt-2 text-xl font-semibold tabular-nums">
-                      {c.value}
-                    </p>
+                    <p className="mt-2 text-xl font-semibold tabular-nums">{c.value}</p>
                   </div>
                   <div className={`rounded-lg bg-secondary p-2 ${c.tint}`}>
                     <Icon className="h-4 w-4" />
@@ -82,16 +76,11 @@ export function Dashboard({
         </CardHeader>
         <CardContent className="p-0">
           {schedules.length === 0 ? (
-            <p className="px-6 pb-6 text-sm text-muted-foreground">
-              Tidak ada jadwal aktif.
-            </p>
+            <p className="px-6 pb-6 text-sm text-muted-foreground">Tidak ada jadwal aktif.</p>
           ) : (
             <ul className="divide-y divide-border">
               {schedules.map((s) => (
-                <li
-                  key={s.id}
-                  className="flex items-center justify-between px-6 py-4"
-                >
+                <li key={s.id} className="flex items-center justify-between px-6 py-4">
                   <div>
                     <p className="text-sm font-medium">{s.recipient}</p>
                     <p className="text-xs text-muted-foreground">

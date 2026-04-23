@@ -10,9 +10,7 @@ export function Header({ profile, title }: { profile: Profile | null; title: str
       <h1 className="text-lg font-semibold tracking-tight">{title}</h1>
       <div className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-2">
         <div className="text-right">
-          <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
-            Saldo
-          </div>
+          <div className="text-[11px] uppercase tracking-wide text-muted-foreground">Saldo</div>
           <div className="text-sm font-semibold tabular-nums text-primary">
             {profile ? (show ? formatIDR(Number(profile.balance)) : "Rp ••••••") : "—"}
           </div>

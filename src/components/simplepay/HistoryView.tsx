@@ -52,31 +52,31 @@ export function HistoryView({ transactions }: { transactions: Transaction[] }) {
               transactions.map((t) => {
                 const { recipient, note } = parseDetails(t.details);
                 return (
-                <TableRow key={t.id}>
-                  <TableCell>
-                    <span
-                      className={`inline-block text-[10px] font-semibold uppercase tracking-wide rounded-full px-2 py-1 ${typeColor[t.type] ?? "bg-secondary text-secondary-foreground"}`}
-                    >
-                      {t.type}
-                    </span>
-                  </TableCell>
-                  <TableCell className="font-medium">{recipient}</TableCell>
-                  <TableCell className="text-muted-foreground max-w-[180px] truncate">
-                    {note || "—"}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {formatDateTime(t.created_at)}
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-xs font-medium text-[oklch(0.45_0.15_155)]">
-                      {t.status}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-right font-semibold tabular-nums">
-                    {t.type === "Top Up" ? "+" : "−"}
-                    {formatIDR(Number(t.amount))}
-                  </TableCell>
-                </TableRow>
+                  <TableRow key={t.id}>
+                    <TableCell>
+                      <span
+                        className={`inline-block text-[10px] font-semibold uppercase tracking-wide rounded-full px-2 py-1 ${typeColor[t.type] ?? "bg-secondary text-secondary-foreground"}`}
+                      >
+                        {t.type}
+                      </span>
+                    </TableCell>
+                    <TableCell className="font-medium">{recipient}</TableCell>
+                    <TableCell className="text-muted-foreground max-w-[180px] truncate">
+                      {note || "—"}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {formatDateTime(t.created_at)}
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-xs font-medium text-[oklch(0.45_0.15_155)]">
+                        {t.status}
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right font-semibold tabular-nums">
+                      {t.type === "Top Up" ? "+" : "−"}
+                      {formatIDR(Number(t.amount))}
+                    </TableCell>
+                  </TableRow>
                 );
               })
             )}

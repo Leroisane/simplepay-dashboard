@@ -25,11 +25,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatIDR, formatDate, type Schedule } from "./types";
 
 const schema = z.object({
-  recipient: z
-    .string()
-    .trim()
-    .min(2, { message: "Nama penerima minimal 2 karakter" })
-    .max(80),
+  recipient: z.string().trim().min(2, { message: "Nama penerima minimal 2 karakter" }).max(80),
   amount: z
     .number({ message: "Nominal harus berupa angka" })
     .positive({ message: "Nominal harus lebih dari 0" })
@@ -167,9 +163,7 @@ export function Scheduled({
         </CardHeader>
         <CardContent className="p-0">
           {schedules.length === 0 ? (
-            <p className="px-6 pb-6 text-sm text-muted-foreground">
-              Belum ada jadwal aktif.
-            </p>
+            <p className="px-6 pb-6 text-sm text-muted-foreground">Belum ada jadwal aktif.</p>
           ) : (
             <Table>
               <TableHeader>

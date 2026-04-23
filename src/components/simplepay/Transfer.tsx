@@ -18,11 +18,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatIDR, formatDateTime, type Profile, type Transaction } from "./types";
 
 const schema = z.object({
-  recipient: z
-    .string()
-    .trim()
-    .min(2, { message: "Nama penerima minimal 2 karakter" })
-    .max(80),
+  recipient: z.string().trim().min(2, { message: "Nama penerima minimal 2 karakter" }).max(80),
   bank: z.string().trim().min(2, { message: "Nama bank wajib diisi" }).max(40),
   amount: z
     .number({ message: "Nominal harus berupa angka" })

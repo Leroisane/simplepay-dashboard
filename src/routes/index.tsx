@@ -61,22 +61,12 @@ function Index() {
           <MobileNav active={view} onChange={setView} />
           <main className="flex-1 p-8 overflow-y-auto">
             {view === "dashboard" && (
-              <Dashboard
-                profile={profile}
-                schedules={schedules}
-                transactions={transactions}
-              />
+              <Dashboard profile={profile} schedules={schedules} transactions={transactions} />
             )}
             {view === "transfer" && (
-              <Transfer
-                profile={profile}
-                onSuccess={loadAll}
-                onDone={() => setView("dashboard")}
-              />
+              <Transfer profile={profile} onSuccess={loadAll} onDone={() => setView("dashboard")} />
             )}
-            {view === "scheduled" && (
-              <Scheduled schedules={schedules} onSuccess={loadAll} />
-            )}
+            {view === "scheduled" && <Scheduled schedules={schedules} onSuccess={loadAll} />}
             {view === "history" && <HistoryView transactions={transactions} />}
           </main>
         </div>

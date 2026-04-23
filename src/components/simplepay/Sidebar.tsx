@@ -10,13 +10,7 @@ const items: { id: View; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "history", label: "History", icon: History },
 ];
 
-function NavItems({
-  active,
-  onChange,
-}: {
-  active: View;
-  onChange: (v: View) => void;
-}) {
+function NavItems({ active, onChange }: { active: View; onChange: (v: View) => void }) {
   return (
     <>
       {items.map((it) => {
@@ -45,13 +39,7 @@ function NavItems({
   );
 }
 
-export function MobileNav({
-  active,
-  onChange,
-}: {
-  active: View;
-  onChange: (v: View) => void;
-}) {
+export function MobileNav({ active, onChange }: { active: View; onChange: (v: View) => void }) {
   return (
     <div className="md:hidden flex items-center gap-1 border-b border-border bg-sidebar px-3 py-2 overflow-x-auto">
       <NavItems active={active} onChange={onChange} />
@@ -59,13 +47,7 @@ export function MobileNav({
   );
 }
 
-export function Sidebar({
-  active,
-  onChange,
-}: {
-  active: View;
-  onChange: (v: View) => void;
-}) {
+export function Sidebar({ active, onChange }: { active: View; onChange: (v: View) => void }) {
   return (
     <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-border bg-sidebar">
       <div className="flex items-center gap-2.5 px-6 h-16 border-b border-border">
@@ -77,9 +59,7 @@ export function Sidebar({
       <nav className="flex-1 p-3 flex flex-col gap-1">
         <NavItems active={active} onChange={onChange} />
       </nav>
-      <div className="p-4 text-xs text-muted-foreground border-t border-border">
-        v1.0 · Demo
-      </div>
+      <div className="p-4 text-xs text-muted-foreground border-t border-border">v1.0 · Demo</div>
     </aside>
   );
 }
