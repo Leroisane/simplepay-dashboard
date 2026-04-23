@@ -53,27 +53,33 @@ function Index() {
   }, [loadAll]);
 
   return (
-    <div className="flex min-h-screen w-full bg-background text-foreground">
-      <Sidebar active={view} onChange={setView} />
-      <div className="flex flex-1 flex-col min-w-0">
-        <Header profile={profile} title={titles[view]} />
-        <MobileNav active={view} onChange={setView} />
-        <main className="flex-1 p-6 overflow-x-auto">
-          {view === "dashboard" && (
-            <Dashboard
-              profile={profile}
-              schedules={schedules}
-              transactions={transactions}
-            />
-          )}
-          {view === "transfer" && (
-            <Transfer profile={profile} onSuccess={loadAll} />
-          )}
-          {view === "scheduled" && (
-            <Scheduled schedules={schedules} onSuccess={loadAll} />
-          )}
-          {view === "history" && <HistoryView transactions={transactions} />}
-        </main>
+    <div className="min-h-screen w-full bg-background text-foreground flex items-start justify-center py-6 px-4">
+      <div className="flex w-full max-w-[1440px] h-[800px] overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-card)]">
+        <Sidebar active={view} onChange={setView} />
+        <div className="flex flex-1 flex-col min-w-0">
+          <Header profile={profile} title={titles[view]} />
+          <MobileNav active={view} onChange={setView} />
+          <main className="flex-1 p-8 overflow-y-auto">
+            {view === "dashboard" && (
+              <Dashboard
+                profile={profile}
+                schedules={schedules}
+                transactions={transactions}
+              />
+            )}
+            {view === "transfer" && (
+              <Transfer
+                profile={profile}
+                onSuccess={loadAll}
+                onDone={() => setView("dashboard")}
+              />
+            )}
+            {view === "scheduled" && (
+              <Scheduled schedules={schedules} onSuccess={loadAll} />
+            )}
+            {view === "history" && <HistoryView transactions={transactions} />}
+          </main>
+        </div>
       </div>
       <Toaster richColors position="top-right" />
     </div>
