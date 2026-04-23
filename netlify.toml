@@ -4,5 +4,5 @@
   status = 200
 
 [build]
-  publish = "dist"
+  publish = "dist/client"
   command = "npm run build"
