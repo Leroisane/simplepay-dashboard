@@ -100,11 +100,11 @@ export function Scheduled({
 
   return (
     <div className="space-y-6">
-      <Card className="max-w-xl">
-        <CardHeader>
-          <CardTitle className="text-base">Buat Jadwal Transfer Berulang</CardTitle>
+      <Card className="mx-auto max-w-[600px] rounded-2xl border-border shadow-[var(--shadow-card)]">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg">Buat Jadwal Transfer Berulang</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="s-recipient">Nama Penerima</Label>
@@ -153,7 +153,7 @@ export function Scheduled({
                 />
               </div>
             </div>
-            <Button type="submit" disabled={submitting} className="w-full">
+            <Button type="submit" disabled={submitting} className="w-full h-11 rounded-lg">
               <CalendarPlus className="h-4 w-4" />
               {submitting ? "Menyimpan..." : "Simpan Jadwal"}
             </Button>
@@ -161,9 +161,9 @@ export function Scheduled({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="mx-auto max-w-[600px] rounded-2xl border-border shadow-[var(--shadow-card)]">
         <CardHeader>
-          <CardTitle className="text-base">Jadwal Aktif</CardTitle>
+          <CardTitle className="text-lg">Jadwal Aktif</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           {schedules.length === 0 ? (

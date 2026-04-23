@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 export function Header({ profile, title }: { profile: Profile | null; title: string }) {
   const [show, setShow] = useState(true);
   return (
-    <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
+    <header className="h-16 border-b border-border bg-card flex items-center justify-between px-8">
       <h1 className="text-lg font-semibold tracking-tight">{title}</h1>
-      <div className="flex items-center gap-3 rounded-lg border border-border bg-card px-4 py-2">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-2">
         <div className="text-right">
           <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
             Saldo
           </div>
-          <div className="text-sm font-semibold tabular-nums">
+          <div className="text-sm font-semibold tabular-nums text-primary">
             {profile ? (show ? formatIDR(Number(profile.balance)) : "Rp ••••••") : "—"}
           </div>
         </div>

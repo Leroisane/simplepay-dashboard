@@ -15,18 +15,27 @@ const typeColor: Record<string, string> = {
   Payment: "bg-accent text-accent-foreground",
 };
 
+function parseDetails(details: string | null) {
+  if (!details) return { recipient: "—", note: "" };
+  // format: "To: Name - Bank · note"
+  const m = details.match(/^To:\s*(.+?)(?:\s*·\s*(.+))?$/);
+  if (m) return { recipient: m[1], note: m[2] ?? "" };
+  return { recipient: details, note: "" };
+}
+
 export function HistoryView({ transactions }: { transactions: Transaction[] }) {
   return (
-    <Card>
+    <Card className="rounded-2xl border-border shadow-[var(--shadow-card)]">
       <CardHeader>
-        <CardTitle className="text-base">Riwayat Transaksi</CardTitle>
+        <CardTitle className="text-lg">Riwayat Transaksi</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Tipe</TableHead>
-              <TableHead>Detail</TableHead>
+              <TableHead>Penerima</TableHead>
+              <TableHead>Catatan</TableHead>
               <TableHead>Waktu</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Nominal</TableHead>
@@ -35,12 +44,14 @@ export function HistoryView({ transactions }: { transactions: Transaction[] }) {
           <TableBody>
             {transactions.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground py-10">
+                <TableCell colSpan={6} className="text-center text-muted-foreground py-10">
                   Belum ada transaksi.
                 </TableCell>
               </TableRow>
             ) : (
-              transactions.map((t) => (
+              transactions.map((t) => {
+                const { recipient, note } = parseDetails(t.details);
+                return (
                 <TableRow key={t.id}>
                   <TableCell>
                     <span
@@ -49,7 +60,10 @@ export function HistoryView({ transactions }: { transactions: Transaction[] }) {
                       {t.type}
                     </span>
                   </TableCell>
-                  <TableCell className="max-w-xs truncate">{t.details ?? "—"}</TableCell>
+                  <TableCell className="font-medium">{recipient}</TableCell>
+                  <TableCell className="text-muted-foreground max-w-[180px] truncate">
+                    {note || "—"}
+                  </TableCell>
                   <TableCell className="text-muted-foreground">
                     {formatDateTime(t.created_at)}
                   </TableCell>
@@ -63,7 +77,8 @@ export function HistoryView({ transactions }: { transactions: Transaction[] }) {
                     {formatIDR(Number(t.amount))}
                   </TableCell>
                 </TableRow>
-              ))
+                );
+              })
             )}
           </TableBody>
         </Table>
