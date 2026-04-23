@@ -1,0 +1,1 @@
+UPDATE public.profiles SET name = 'Muhammad Ihsan Fadillah';

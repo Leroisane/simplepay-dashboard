@@ -42,17 +42,19 @@ export function Dashboard({
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-sm text-muted-foreground">Halo,</p>
         <h2 className="text-2xl font-semibold tracking-tight">
-          {profile?.name ?? "—"}
+          Halo, {profile?.name ?? "—"}
         </h2>
+        <p className="text-sm text-muted-foreground mt-1">
+          Selamat datang kembali di SimplePay.
+        </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((c) => {
           const Icon = c.icon;
           return (
-            <Card key={c.label}>
+            <Card key={c.label} className="rounded-2xl border-border shadow-[var(--shadow-card)]">
               <CardContent className="p-5">
                 <div className="flex items-start justify-between">
                   <div>
@@ -63,7 +65,7 @@ export function Dashboard({
                       {c.value}
                     </p>
                   </div>
-                  <div className={`rounded-md bg-secondary p-2 ${c.tint}`}>
+                  <div className={`rounded-lg bg-secondary p-2 ${c.tint}`}>
                     <Icon className="h-4 w-4" />
                   </div>
                 </div>
@@ -73,10 +75,10 @@ export function Dashboard({
         })}
       </div>
 
-      <Card>
+      <Card className="rounded-2xl border-border shadow-[var(--shadow-card)]">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
           <CalendarClock className="h-4 w-4 text-primary" />
-          <CardTitle className="text-base">Upcoming Schedules</CardTitle>
+          <CardTitle className="text-lg">Upcoming Schedules</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           {schedules.length === 0 ? (

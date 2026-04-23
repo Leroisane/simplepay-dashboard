@@ -27,12 +27,15 @@ function NavItems({
             key={it.id}
             onClick={() => onChange(it.id)}
             className={cn(
-              "flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+              "relative flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
               isActive
-                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                : "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground",
+                ? "bg-primary-soft text-primary"
+                : "text-muted-foreground hover:bg-secondary hover:text-foreground",
             )}
           >
+            {isActive && (
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 rounded-r bg-primary" />
+            )}
             <Icon className="h-4 w-4" />
             {it.label}
           </button>
@@ -64,9 +67,9 @@ export function Sidebar({
   onChange: (v: View) => void;
 }) {
   return (
-    <aside className="hidden md:flex w-60 shrink-0 flex-col border-r border-border bg-sidebar">
-      <div className="flex items-center gap-2 px-6 h-16 border-b border-border">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+    <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-border bg-sidebar">
+      <div className="flex items-center gap-2.5 px-6 h-16 border-b border-border">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Wallet className="h-4 w-4" />
         </div>
         <span className="text-base font-semibold tracking-tight">SimplePay</span>

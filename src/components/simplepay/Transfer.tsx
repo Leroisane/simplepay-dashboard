@@ -34,9 +34,11 @@ const schema = z.object({
 export function Transfer({
   profile,
   onSuccess,
+  onDone,
 }: {
   profile: Profile | null;
   onSuccess: () => void;
+  onDone: () => void;
 }) {
   const [recipient, setRecipient] = useState("");
   const [bank, setBank] = useState("");
@@ -44,6 +46,8 @@ export function Transfer({
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState<Transaction | null>(null);
+  const [finalBalance, setFinalBalance] = useState<number | null>(null);
+  const [recipientName, setRecipientName] = useState<string>("");
 
   const reset = () => {
     setRecipient("");
@@ -100,6 +104,8 @@ export function Transfer({
       if (insErr) throw insErr;
 
       setSuccess(tx as Transaction);
+      setFinalBalance(newBalance);
+      setRecipientName(`${parsed.data.recipient} · ${parsed.data.bank}`);
       reset();
       onSuccess();
     } catch (err) {
@@ -113,11 +119,11 @@ export function Transfer({
 
   return (
     <>
-      <Card className="max-w-xl">
-        <CardHeader>
-          <CardTitle className="text-base">Kirim Uang</CardTitle>
+      <Card className="mx-auto max-w-[600px] rounded-2xl border-border shadow-[var(--shadow-card)]">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg">Kirim Uang</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="recipient">Nama Penerima</Label>
@@ -166,7 +172,7 @@ export function Transfer({
                 maxLength={140}
               />
             </div>
-            <Button type="submit" disabled={submitting} className="w-full">
+            <Button type="submit" disabled={submitting} className="w-full h-11 rounded-lg">
               <Send className="h-4 w-4" />
               {submitting ? "Memproses..." : "Kirim Sekarang"}
             </Button>
@@ -174,8 +180,16 @@ export function Transfer({
         </CardContent>
       </Card>
 
-      <Dialog open={!!success} onOpenChange={(o) => !o && setSuccess(null)}>
-        <DialogContent>
+      <Dialog
+        open={!!success}
+        onOpenChange={(o) => {
+          if (!o) {
+            setSuccess(null);
+            onDone();
+          }
+        }}
+      >
+        <DialogContent className="max-w-[600px] rounded-2xl shadow-[var(--shadow-card)]">
           <DialogHeader>
             <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-[oklch(0.65_0.17_155/0.15)]">
               <CheckCircle2 className="h-6 w-6 text-[oklch(0.65_0.17_155)]" />
@@ -186,17 +200,30 @@ export function Transfer({
             </DialogDescription>
           </DialogHeader>
           {success && (
-            <div className="mt-2 rounded-lg border border-border bg-muted/40 p-4 space-y-3 text-sm">
+            <div className="mt-2 rounded-xl border border-border bg-muted/40 p-5 space-y-3 text-sm">
+              <Row label="Penerima" value={recipientName || "—"} />
               <Row label="Nominal" value={formatIDR(Number(success.amount))} bold />
-              <Row label="Tipe" value={success.type} />
-              <Row label="Detail" value={success.details ?? "—"} />
-              <Row label="Status" value={success.status} />
-              <Row label="Waktu" value={formatDateTime(success.created_at)} />
-              <Row label="ID" value={success.id.slice(0, 8).toUpperCase()} mono />
+              <Row
+                label="Saldo Akhir"
+                value={finalBalance !== null ? formatIDR(finalBalance) : "—"}
+                bold
+              />
+              <div className="border-t border-border pt-3 space-y-3">
+                <Row label="Tipe" value={success.type} />
+                <Row label="Status" value={success.status} />
+                <Row label="Waktu" value={formatDateTime(success.created_at)} />
+                <Row label="ID Transaksi" value={success.id.slice(0, 8).toUpperCase()} mono />
+              </div>
             </div>
           )}
           <DialogFooter>
-            <Button className="w-full" onClick={() => setSuccess(null)}>
+            <Button
+              className="w-full h-11 rounded-lg"
+              onClick={() => {
+                setSuccess(null);
+                onDone();
+              }}
+            >
               Selesai
             </Button>
           </DialogFooter>
