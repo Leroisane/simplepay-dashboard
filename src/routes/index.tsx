@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { Sidebar, type View } from "@/components/simplepay/Sidebar";
+import { Sidebar, MobileNav, type View } from "@/components/simplepay/Sidebar";
 import { Header } from "@/components/simplepay/Header";
 import { Dashboard } from "@/components/simplepay/Dashboard";
 import { Transfer } from "@/components/simplepay/Transfer";
@@ -55,6 +55,7 @@ function Index() {
       <Sidebar active={view} onChange={setView} />
       <div className="flex flex-1 flex-col min-w-0">
         <Header profile={profile} title={titles[view]} />
+        <MobileNav active={view} onChange={setView} />
         <main className="flex-1 p-6 overflow-x-auto">
           {view === "dashboard" && (
             <Dashboard
