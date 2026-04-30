@@ -42,7 +42,7 @@ export function Dashboard({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight">Halo, {profile?.name ?? "—"}</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Halo, Sofia Wylie</h2>
         <p className="text-sm text-muted-foreground mt-1">Selamat datang kembali di SimplePay.</p>
       </div>
 
