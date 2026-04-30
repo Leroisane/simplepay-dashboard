@@ -9,6 +9,7 @@ import { Transfer } from "@/components/simplepay/Transfer";
 import { HistoryView } from "@/components/simplepay/HistoryView";
 import { Scheduled } from "@/components/simplepay/Scheduled";
 import type { Profile, Schedule, Transaction } from "@/components/simplepay/types";
+import { TransferError } from "@/components/simplepay/TransferError";
 
 export const Route = createFileRoute("/")({
   head: () => ({
