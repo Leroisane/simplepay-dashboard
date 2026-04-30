@@ -21,7 +21,7 @@ export function Header({ profile, title }: { profile: Profile | null; title: str
       amount: 1000000,
       type: "Top Up",
       status: "Completed",
-      details: "Cheat Developer",
+      details: "Top Up: From BCA Virtual Account",
     });
 
     toast.success("Cheat Top Up 1 Juta Berhasil! Refresh halaman (F5) ya.");
