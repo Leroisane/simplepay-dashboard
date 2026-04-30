@@ -7,7 +7,7 @@ const items: { id: View; label: string; icon: typeof LayoutDashboard }[] = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "transfer", label: "Transfer", icon: Send },
   { id: "scheduled", label: "Scheduled", icon: Calendar },
-  { id: "history", label: "History", icon: History },
+  // { id: "history", label: "History", icon: History },
 ];
 
 function NavItems({ active, onChange }: { active: View; onChange: (v: View) => void }) {
