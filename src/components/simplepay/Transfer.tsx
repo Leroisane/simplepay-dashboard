@@ -208,7 +208,7 @@ export function Transfer({ profile, onSuccess, onDone }: TransferProps) {
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Sumber Dana
                 </p>
-                <p className="text-sm font-bold text-slate-900">{profile?.name || "Sofia Wylie"}</p>
+                <p className="text-sm font-bold text-slate-900">{"Sofia Wylie"}</p>
                 <p className="text-xs text-slate-500">Bank Mandiri - 12345262004</p>
               </div>
               <div className="text-right">
