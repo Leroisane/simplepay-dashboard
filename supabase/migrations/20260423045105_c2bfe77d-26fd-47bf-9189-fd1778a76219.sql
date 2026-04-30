@@ -1,1 +1,1 @@
-UPDATE public.profiles SET name = 'Muhammad Ihsan Fadillah';
+UPDATE public.profiles SET name = 'Sofia Wylie';
